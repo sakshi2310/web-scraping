@@ -1,0 +1,27 @@
+import requests
+from bs4 import BeautifulSoup
+
+url='target url'
+
+r=requests.get(url)
+print(r.status_code)
+print(r.text)
+
+soup=BeautifulSoup(r.text,"lxml")
+v=soup.find('h4',{"class":"class name"})
+print(v.text)
+
+
+v1=soup.find_all('h4',{"class":"class name"})
+
+l=[i.text for i in v1]
+
+v2=soup.find_all('p',class_='class name')
+
+d1=[i.text for i in v2]
+
+import pandas as pd
+df = pd.DataFrame(list(zip(l, d1)),columns =['col name', 'col name 2'])
+print(df)
+
+df.to_csv('file name')
